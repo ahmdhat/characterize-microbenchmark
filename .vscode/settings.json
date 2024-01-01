@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "thread_policy.h": "c",
+        "types.h": "c",
+        "pthread.h": "c",
+        "dataset.h": "c"
+    }
+}

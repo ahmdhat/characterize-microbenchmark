@@ -14,14 +14,14 @@
 #include "common/macros.h"
 #include "common/types.h"
 
-/* Include application-specific headers */
-#include "include/types.h"
-
 #include <stdio.h>
 #include <mach/thread_policy.h>
 #include <mach/thread_act.h>
 #include <sys/sysctl.h>
 #include <pthread.h>
+
+/* Include application-specific headers */
+#include "include/types.h"
 
 #define SYSCTL_CORE_COUNT "machdep.cpu.core_count"
 
@@ -248,13 +248,13 @@ void *impl_parallel(void *args)
   {
     /* Initialize the argument structure */
     targs[i].num_stocks = size_per_thread;
-    targs[i].output = (float *)output;
-    targs[i].sptPrice = (float *)sptPrice;
-    targs[i].strike = (float *)strike;
-    targs[i].rate = (float *)rate;
-    targs[i].volatility = (float *)volatility;
-    targs[i].otime = (float *)otime;
-    targs[i].otype = (char *)otype;
+    targs[i].output = output;
+    targs[i].sptPrice = sptPrice;
+    targs[i].strike = strike;
+    targs[i].rate = rate;
+    targs[i].volatility = volatility;
+    targs[i].otime = otime;
+    targs[i].otype = otype;
 
     output += targs[i].num_stocks;
     sptPrice += targs[i].num_stocks;
