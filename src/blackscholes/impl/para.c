@@ -300,7 +300,7 @@ void *impl_parallel(void *args)
     }
 
     /* Perform trailing elements */
-    for (int i = size - remaining; i < targs[0].num_stocks; i++)
+    for (int i = size - remaining; i < size; i++)
     {
       ((float *)targs[0].output)[i] = blackScholesSingle(
           (targs[0].sptPrice)[i],
