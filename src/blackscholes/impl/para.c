@@ -71,7 +71,6 @@ int pthread_setaffinity_np(pthread_t thread, size_t cpu_size,
     if (CPU_ISSET(core, cpu_set))
       break;
   }
-  printf("binding to core %d\n", core);
   thread_affinity_policy_data_t policy = {core};
   mach_thread = pthread_mach_thread_np(thread);
   thread_policy_set(mach_thread, THREAD_AFFINITY_POLICY,
@@ -191,7 +190,6 @@ float blackScholesSingle(float sptprice, float strike, float rate, float volatil
 void *blackScholesPara(void *args)
 {
   args_t *parsed_args = (args_t *)args;
-
   /* Get all the arguments */
   register size_t size = parsed_args->num_stocks;
   float *sptPrice = parsed_args->sptPrice;
@@ -292,12 +290,12 @@ void *impl_parallel(void *args)
     for (int i = 0; i < targs[0].num_stocks; i++)
     {
       ((float *)targs[0].output)[i] = blackScholesSingle(
-          ((float *)targs[0].sptPrice)[i],
-          ((float *)targs[0].strike)[i],
-          ((float *)targs[0].rate)[i],
-          ((float *)targs[0].volatility)[i],
-          ((char *)targs[0].otime)[i],
-          ((float *)targs[0].otype)[i],
+          (targs[0].sptPrice)[i],
+          (targs[0].strike)[i],
+          (targs[0].rate)[i],
+          (targs[0].volatility)[i],
+          (targs[0].otime)[i],
+          (targs[0].otype)[i],
           0);
     }
 
@@ -305,12 +303,12 @@ void *impl_parallel(void *args)
     for (int i = size - remaining; i < targs[0].num_stocks; i++)
     {
       ((float *)targs[0].output)[i] = blackScholesSingle(
-          ((float *)targs[0].sptPrice)[i],
-          ((float *)targs[0].strike)[i],
-          ((float *)targs[0].rate)[i],
-          ((float *)targs[0].volatility)[i],
-          ((char *)targs[0].otime)[i],
-          ((float *)targs[0].otype)[i],
+          (targs[0].sptPrice)[i],
+          (targs[0].strike)[i],
+          (targs[0].rate)[i],
+          (targs[0].volatility)[i],
+          (targs[0].otime)[i],
+          (targs[0].otype)[i],
           0);
     }
   }
